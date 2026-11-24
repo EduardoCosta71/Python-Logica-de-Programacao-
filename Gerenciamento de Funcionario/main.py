@@ -120,7 +120,7 @@ while True:
                 else: 
 
                     print("Erro: CPF inválido.")
-                    
+
 
             print("Deseja realizar outra consulta?")
                 
@@ -136,6 +136,19 @@ while True:
             else:
                 print("Resposta Inválida.")
 
+    #Calculando todos os salários
+    if opcao == "4":
+
+        print("Calculando todos os salários.")
+
+        total = sum(func["salario"] for func in funcionarios)
+        print("A soma de todos os salários ficam em: R$ ", total)
+
+    if opcao == "5":
+
+        print("Funcionário com maior salário.")
+
+        
 
 
     if opcao == "7":
