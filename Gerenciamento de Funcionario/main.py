@@ -86,7 +86,7 @@ while True:
 
 
     #Listando todos os funcionarios da empresa
-    if opcao == "2":
+    elif opcao == "2":
 
         print("Listando todos os funcionários.")
 
@@ -100,7 +100,7 @@ while True:
             print("===========================")
 
     #Listando funcionario 1 por 1 com CPF        
-    if opcao == "3":
+    elif opcao == "3":
 
         while True:
 
@@ -137,24 +137,56 @@ while True:
                 print("Resposta Inválida.")
 
     #Calculando todos os salários
-    if opcao == "4":
+    elif opcao == "4":
 
         print("Calculando todos os salários.")
 
         total = sum(func["salario"] for func in funcionarios)
         print("A soma de todos os salários ficam em: R$ ", total)
 
-    if opcao == "5":
+    elif opcao == "5":
 
         print("Funcionário com maior salário.")
 
+        maior = max(func["salario"] for func in funcionarios)
+
+        for func in funcionarios:
+
+            if func["salario"] == maior:
+
+                print("Funcionário com o maior salário: ")
+                print(f"Nome: {func['nome']}")  
+                print(f"Idade: {func['idade']}")
+                print(f"Cargo: {func['cargo']}")
+                print(f"Salario: {func['salario']}")
+
+
+    elif opcao == "6":
+
+        print("Funcionário com menor salário.")
+
+        menor = min(func["salario"] for func in funcionarios)
         
+        for func in funcionarios:
+
+            if func["salario"] == menor:
+
+                print("Funcionário com o maior salário: ")
+                print(f"Nome: {func['nome']}")  
+                print(f"Idade: {func['idade']}")
+                print(f"Cargo: {func['cargo']}")
+                print(f"Salario: {func['salario']}")
 
 
-    if opcao == "7":
+    elif opcao == "7":
 
         print("Programa encerrado.")
         break
+
+
+    else:
+
+        print("Opção Inválida!")
 
         
 
