@@ -3,7 +3,7 @@
 #Dicionario com cadastro dos funcionarios.
 cadastro = {
 
-    "cpf": 0,
+    "cpf": "0",
     "nome": "Nome Funcionario",
     "idade": 0,
     "cargo": "Cargo Funcionario",
@@ -34,40 +34,47 @@ while True:
 
         while  True:
 
-            cpf = int(input("CPF do Funcionário: "))
-            nome = input("Nome do Funcionário: ")
-            idade = int(input("Idade do Funcionário: "))
+            cpf = input("CPF do Funcionário: ").strip()
 
-            if idade <= 16:
+            if any(func["cpf"] == cpf for func in funcionarios):
+                print("Erro: já exite um funcionário cadastrado com este CPF!")
 
-                print("A idade não pode ser inferior a 16 anos.")
-                break
+            else:
 
-            cargo = input("Cargo do Funcionário: ")
-            salario = float(input("Salário atual do Funcionário: "))
+                nome = input("Nome do Funcionário: ")
+                idade = int(input("Idade do Funcionário: "))
 
-            if salario < 0:
-                    print("Salário acima de 0!")
-                    break
+                if idade < 16:
 
-            else: 
+                    print("A idade não pode ser inferior a 16 anos.")
 
-                cadastro["cpf"] = cpf
-                cadastro["nome"] = nome
-                cadastro["idade"] = idade
-                cadastro["cargo"] = cargo
-                cadastro["salario"] = salario
+                else:
 
-                print("cadastro feito com sucesso!")
+                    cargo = input("Cargo do Funcionário: ")
+                    salario = float(input("Salário atual do Funcionário: "))
 
-                print(f"cpf: {cpf}")
-                print(f"Nome: {nome}")
-                print(f"Idade: {idade}")
-                print(f"Cargo: {cargo}")
-                print(f"Salario: {salario}")
+                    if salario <= 0:
+                    
+                        print("Salário acima de 0!")
+                    
+                    else: 
 
-                #Guarda os dados do cadastro na lista funcionarios.
-                funcionarios.append(cadastro.copy())
+                        cadastro["cpf"] = cpf
+                        cadastro["nome"] = nome
+                        cadastro["idade"] = idade
+                        cadastro["cargo"] = cargo
+                        cadastro["salario"] = salario
+
+                        print("cadastro feito com sucesso!")
+
+                        print(f"cpf: {cpf}")
+                        print(f"Nome: {nome}")
+                        print(f"Idade: {idade}")
+                        print(f"Cargo: {cargo}")
+                        print(f"Salario: {salario}")
+
+                        #Guarda os dados do cadastro na lista funcionarios.
+                        funcionarios.append(cadastro.copy())
 
 
             print("Deseja realizar outro cadastro?")
@@ -106,20 +113,24 @@ while True:
 
             print("Buscar funcionário por CPF")
 
-            cpf_func = int(input("Digite o CPF do funcionário: "))
+            cpf_func = input("Digite o CPF do funcionário: ").strip()
+            encontra = False
+
 
             for func in funcionarios:
 
                 if func["cpf"] == cpf_func:
+
+                    encontra = True
 
                     print(f"Nome: {func['nome']}")  
                     print(f"Idade: {func['idade']}")
                     print(f"Cargo: {func['cargo']}")
                     print(f"Salario: {func['salario']}")
 
-                else: 
+            if encontra == False:
 
-                    print("Erro: CPF inválido.")
+                print("CPF não encontrado.")
 
 
             print("Deseja realizar outra consulta?")
@@ -139,43 +150,62 @@ while True:
     #Calculando todos os salários
     elif opcao == "4":
 
-        print("Calculando todos os salários.")
+        if len(funcionarios) == 0:
+            print("Nenhum salário cadastrado.")
 
-        total = sum(func["salario"] for func in funcionarios)
-        print("A soma de todos os salários ficam em: R$ ", total)
+        else:
 
+            print("Calculando todos os salários.")
+
+            total = sum(func["salario"] for func in funcionarios)
+            print("A soma de todos os salários ficam em: R$ ", total)
+
+    #FIltra o maior salario
     elif opcao == "5":
 
         print("Funcionário com maior salário.")
 
-        maior = max(func["salario"] for func in funcionarios)
+        if len(funcionarios) == 0:
+        
+            print("Nenhum funcionário cadastrado.")
 
-        for func in funcionarios:
+        else:
 
-            if func["salario"] == maior:
+            maior = max(func["salario"] for func in funcionarios)
 
-                print("Funcionário com o maior salário: ")
-                print(f"Nome: {func['nome']}")  
-                print(f"Idade: {func['idade']}")
-                print(f"Cargo: {func['cargo']}")
-                print(f"Salario: {func['salario']}")
+            for func in funcionarios:
+
+                if func["salario"] == maior:
+
+                    print("Funcionário com o maior salário: ")
+                    print(f"Nome: {func['nome']}")  
+                    print(f"Idade: {func['idade']}")
+                    print(f"Cargo: {func['cargo']}")
+                    print(f"Salario: {func['salario']}")
 
 
+    #Filtra menor salário
     elif opcao == "6":
 
         print("Funcionário com menor salário.")
 
-        menor = min(func["salario"] for func in funcionarios)
+        if len(funcionarios) == 0:
+
+            print("Nenhum funcionário cadastrado.")
+
+        else:
         
-        for func in funcionarios:
+            menor = min(func["salario"] for func in funcionarios)
+        
+            for func in funcionarios:
 
-            if func["salario"] == menor:
+                if func["salario"] == menor:
 
-                print("Funcionário com o maior salário: ")
-                print(f"Nome: {func['nome']}")  
-                print(f"Idade: {func['idade']}")
-                print(f"Cargo: {func['cargo']}")
-                print(f"Salario: {func['salario']}")
+                    print("Funcionário com o menor salário: ")
+                    print(f"Nome: {func['nome']}")  
+                    print(f"Idade: {func['idade']}")
+                    print(f"Cargo: {func['cargo']}")
+                    print(f"Salario: {func['salario']}")
 
 
     elif opcao == "7":
@@ -187,12 +217,3 @@ while True:
     else:
 
         print("Opção Inválida!")
-
-        
-
-
-            
-
-            
-
-
