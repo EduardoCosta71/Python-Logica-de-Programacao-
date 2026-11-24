@@ -1,5 +1,6 @@
 # Gerenciamento de funcionarios.
 
+#Dicionario com cadastro dos funcionarios.
 cadastro = {
 
     "cpf": 0,
@@ -9,6 +10,7 @@ cadastro = {
     "salario": 0
 }
 
+#Lista dos funcionarios que vamos usar com o For
 funcionarios = []
 
 
@@ -31,7 +33,8 @@ while True:
         print("Cadastro de Funcionário!")
 
         while  True:
-            cpf = int(input("CPF do Funcionário"))
+
+            cpf = int(input("CPF do Funcionário: "))
             nome = input("Nome do Funcionário: ")
             idade = int(input("Idade do Funcionário: "))
 
@@ -63,6 +66,7 @@ while True:
                 print(f"Cargo: {cargo}")
                 print(f"Salario: {salario}")
 
+                #Guarda os dados do cadastro na lista funcionarios.
                 funcionarios.append(cadastro.copy())
 
 
@@ -80,6 +84,8 @@ while True:
             else:
                 print("Resposta Inválida.")
 
+
+    #Listando todos os funcionarios da empresa
     if opcao == "2":
 
         print("Listando todos os funcionários.")
@@ -92,14 +98,43 @@ while True:
             print(f"Cargo: {func['cargo']}")
             print(f"Salario: {func['salario']}")
             print("===========================")
-            
+
+    #Listando funcionario 1 por 1 com CPF        
     if opcao == "3":
 
-        print("Buscar funcionário por CPF")
+        while True:
 
-        cpf = int(input("Digite o CPF do funcionário "))
+            print("Buscar funcionário por CPF")
 
+            cpf_func = int(input("Digite o CPF do funcionário: "))
 
+            for func in funcionarios:
+
+                if func["cpf"] == cpf_func:
+
+                    print(f"Nome: {func['nome']}")  
+                    print(f"Idade: {func['idade']}")
+                    print(f"Cargo: {func['cargo']}")
+                    print(f"Salario: {func['salario']}")
+
+                else: 
+
+                    print("Erro: CPF inválido.")
+                    
+
+            print("Deseja realizar outra consulta?")
+                
+            resposta = input("Digite 's' para sim ou 'n' para não: ")
+                
+            if resposta.lower() == 's':
+                continue
+                
+            elif resposta.lower() == 'n':
+                print("Voltando a menu principal....")  
+                break
+                
+            else:
+                print("Resposta Inválida.")
 
 
 
