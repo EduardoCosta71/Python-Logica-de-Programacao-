@@ -36,6 +36,7 @@ while True:
 
             cpf = input("CPF do Funcionário: ").strip()
 
+            # O Any faz a verificação para conferir se existe outro cpf igual
             if any(func["cpf"] == cpf for func in funcionarios):
                 print("Erro: já exite um funcionário cadastrado com este CPF!")
 
@@ -44,6 +45,7 @@ while True:
                 nome = input("Nome do Funcionário: ")
                 idade = int(input("Idade do Funcionário: "))
 
+                #Verificação de Idade
                 if idade < 16:
 
                     print("A idade não pode ser inferior a 16 anos.")
@@ -59,6 +61,7 @@ while True:
                     
                     else: 
 
+                        #Os registros são guardados aqui 
                         cadastro["cpf"] = cpf
                         cadastro["nome"] = nome
                         cadastro["idade"] = idade
