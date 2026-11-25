@@ -83,8 +83,69 @@ def consultar_saldo(conta_criada):
             print("Resposta Inválida.")
 
 
-    
 
+def depositar(conta_criada):
+
+    while True:
+
+        numeroC = int(input("Digite seu número de conta para depositar o dinheiro :  "))
+
+        if numeroC <= 0:
+            print("O número da conta não pode ser menor ou igual a 0.")
+
+            
+        encontrado = False
+
+        for c in conta_criada:
+        
+            if c["numeroConta"] == numeroC:
+        
+                encontrado = True
+
+                while True:
+
+                    try:
+
+                        valor = float(input("Deposite o valor desejado: "))
+
+                        if valor <= 0:
+
+                            print("o valor depositado não pode ser abaixo de 0 ou negativo.")
+
+                        else:
+                            break
+
+                    except ValueError:
+
+                        print("Erro! Digite um valor numérico valido.")
+
+
+                saldo_anterior = c['saldo']
+                c['saldo'] += valor
+
+                print(f"Titular: {c['titular']}")
+                print(f"Número da Conta: {c['numeroConta']}")
+                print("Saldo anterior: R$ ", saldo_anterior)
+                print(f"Saldo atual: R$ {c['saldo']}")
+                
+        
+        if encontrado == False:
+        
+            print("Conta não encontrada")
+        
+            print("Deseja realizar outra consulta?")
+                                
+        resposta = input("Digite 's' para sim ou 'n' para não: ")
+                                
+        if resposta.lower() == 's':
+            continue
+                                
+        elif resposta.lower() == 'n':
+            print("Voltando a menu principal....")  
+            break
+                                
+        else:
+            print("Resposta Inválida.")
 
 
 
@@ -95,6 +156,8 @@ while True:
     print("============ Sistema Bancario ============")
     print("1 - Cadastrar cliente")
     print("2 - Consultar saldo")
+    print("3 - Depositar dinheiro")
+    print("8 - Sair")
 
 
     opcao = input("Escolha uma opção: ")
@@ -106,6 +169,15 @@ while True:
     elif opcao == '2':
 
         consultar_saldo(contaBanco)
+
+    elif opcao == '3':
+
+        depositar(contaBanco)
+
+    elif opcao == "8":
+
+        print("Saindo da conta..")
+        break
 
     else:
 
