@@ -1,5 +1,6 @@
 # Sistema Bancario
 
+# == Criação da conta == 
 def criar_conta(conta_criada):
 
     titular = input("Digite o nome do titular: ").strip()
@@ -45,12 +46,55 @@ def criar_conta(conta_criada):
     print(f"Cadastro do(e) {titular} feito com sucesso!")
 
 
+# == Consultar o saldo ==
+def consultar_saldo(conta_criada):
+
+    while True:
+        
+        numeroC = int(input("Digite seu número de conta para consultar seu saldo:  "))
+        encontrado = False
+
+        for c in conta_criada:
+
+            if c["numeroConta"] == numeroC:
+
+                encontrado = True
+
+                print(f"Titular: {c['titular']}")
+                print(f"Número da Conta: {c['numeroConta']}")
+                print(f"Saldo: {c['saldo']}")
+
+        if encontrado == False:
+
+            print("Conta não encontrada")
+
+        print("Deseja realizar outra consulta?")
+                        
+        resposta = input("Digite 's' para sim ou 'n' para não: ")
+                        
+        if resposta.lower() == 's':
+            continue
+                        
+        elif resposta.lower() == 'n':
+            print("Voltando a menu principal....")  
+            break
+                        
+        else:
+            print("Resposta Inválida.")
+
+
+    
+
+
+
+
 contaBanco = []
 
 while True:
 
     print("============ Sistema Bancario ============")
     print("1 - Cadastrar cliente")
+    print("2 - Consultar saldo")
 
 
     opcao = input("Escolha uma opção: ")
@@ -58,6 +102,10 @@ while True:
     if opcao == "1":
 
         criar_conta(contaBanco)
+
+    elif opcao == '2':
+
+        consultar_saldo(contaBanco)
 
     else:
 
